@@ -3,16 +3,22 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import {
   ArrowDown,
+  Bot,
+  Camera,
   ChevronDown,
   Code2,
   Database,
   ExternalLink,
+  FlaskConical,
   Gamepad2,
   Mail,
   Network,
+  ShieldCheck,
+  UtensilsCrossed,
 } from "lucide-react";
 
 import {
+  FaGithub,
   FaJava,
   FaLinkedinIn,
   FaPython,
@@ -20,6 +26,72 @@ import {
 } from "react-icons/fa";
 
 import "./App.css";
+
+
+/* =========================================================
+   GARFADA (projeto de IA generativa)
+========================================================= */
+
+const GARFADA_GITHUB_URL =
+  "https://github.com/martinsjul/Garfada";
+
+// Cole aqui o link da Vercel quando o deploy estiver pronto.
+const GARFADA_DEMO_URL = "";
+
+const garfadaLados = [
+  {
+    icone: <Bot size={24} />,
+    label: "Para o cliente",
+    titulo: "Agente de pedidos",
+    texto:
+      "Você conversa como com um amigo: \"sou vegetariana, quero uma massa até R$ 50\". O agente busca no catálogo, lembra suas restrições, monta o carrinho e mostra como pensou em cada passo.",
+    imagem: "/garfada-agente.jpg",
+    alt: "Tela do agente de pedidos do Garfada com cards de pratos e carrinho",
+  },
+  {
+    icone: <Camera size={24} />,
+    label: "Para o restaurante",
+    titulo: "Copiloto de cardápio",
+    texto:
+      "O dono envia a foto do cardápio de papel e a IA extrai pratos, preços e tags, reescreve as descrições e sugere combos. Ao publicar, o agente do cliente já recomenda esses pratos.",
+    imagem: "/garfada-copiloto.jpg",
+    alt: "Tela do copiloto do restaurante do Garfada lendo a foto de um cardápio",
+  },
+];
+
+const garfadaDestaques = [
+  {
+    icone: <Bot size={20} />,
+    titulo: "Function calling",
+    texto: "O Gemini decide sozinho quais das 9 ferramentas usar: buscar, ver cardápio, salvar preferência, carrinho.",
+  },
+  {
+    icone: <Camera size={20} />,
+    titulo: "Visão + JSON",
+    texto: "Foto do cardápio vira dados estruturados com schema e validação.",
+  },
+  {
+    icone: <ShieldCheck size={20} />,
+    titulo: "Guardrails no código",
+    texto: "Restrições e preços são garantidos no servidor, não só no prompt.",
+  },
+  {
+    icone: <FlaskConical size={20} />,
+    titulo: "Evals 11/11",
+    texto: "Testes de qualidade do agente rodando contra a API real do Gemini.",
+  },
+];
+
+const garfadaStack = [
+  "Next.js",
+  "React",
+  "TypeScript",
+  "Google Gemini",
+  "Function calling",
+  "Tailwind CSS",
+  "Vitest",
+  "Playwright",
+];
 
 
 /* =========================================================
@@ -345,6 +417,21 @@ function App() {
         "A estrutura inicial, o banco e a primeira carga territorial já existem. Agora outras bases estão sendo integradas.",
 
       link:
+        "#garfada",
+
+      linkTexto:
+        "Ver o projeto de IA ↓",
+    },
+
+
+    garfada: {
+      titulo:
+        "Agora tem IA generativa! 🤖",
+
+      texto:
+        "No Garfada, um agente de IA entende o que você quer comer, lembra suas restrições e monta o pedido. E o restaurante sobe o cardápio só com uma foto.",
+
+      link:
         "#portfolio",
 
       linkTexto:
@@ -426,6 +513,7 @@ function App() {
       "veltis-fluxo",
       "veltis-implementacao",
       "veltis-status",
+      "garfada",
       "portfolio",
       "ultima-virtude",
       "trajetoria",
@@ -596,6 +684,10 @@ function App() {
 
           <a href="#veltis">
             Veltis
+          </a>
+
+          <a href="#garfada">
+            Garfada
           </a>
 
           <a href="#portfolio">
@@ -1544,6 +1636,200 @@ function App() {
           </p>
 
         </div>
+
+      </section>
+
+
+      {/* ===================================================
+          GARFADA
+      =================================================== */}
+
+      <section
+        id="garfada"
+        className="section garfada-section"
+      >
+
+        <div className="section-header">
+
+          <span>
+            Projeto de IA generativa
+          </span>
+
+
+          <h2>
+            Garfada
+          </h2>
+
+
+          <p>
+            Um protótipo de IA aplicada a delivery que
+            atende os dois lados do marketplace: quem
+            pede comida conversando e o restaurante que
+            transforma o cardápio de papel em cardápio
+            digital com uma foto.
+          </p>
+
+        </div>
+
+
+        <div className="garfada-sides">
+
+          {garfadaLados.map((lado, index) => (
+            <motion.article
+              key={lado.titulo}
+              className="garfada-side-card"
+
+              initial={{
+                opacity: 0,
+                y: 25,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+              }}
+
+              transition={{
+                delay: index * 0.12,
+              }}
+            >
+
+              <div className="garfada-shot">
+                <img
+                  src={lado.imagem}
+                  alt={lado.alt}
+                  loading="lazy"
+                />
+              </div>
+
+
+              <div className="garfada-side-body">
+
+                <div className="garfada-side-title">
+
+                  <div className="garfada-icon">
+                    {lado.icone}
+                  </div>
+
+                  <div>
+                    <span className="mini-label">
+                      {lado.label}
+                    </span>
+
+                    <h3>
+                      {lado.titulo}
+                    </h3>
+                  </div>
+
+                </div>
+
+
+                <p>
+                  {lado.texto}
+                </p>
+
+              </div>
+
+            </motion.article>
+          ))}
+
+        </div>
+
+
+        <div className="garfada-highlights">
+
+          {garfadaDestaques.map((item) => (
+            <div
+              key={item.titulo}
+              className="garfada-highlight"
+            >
+
+              <div className="garfada-highlight-icon">
+                {item.icone}
+              </div>
+
+              <strong>
+                {item.titulo}
+              </strong>
+
+              <p>
+                {item.texto}
+              </p>
+
+            </div>
+          ))}
+
+        </div>
+
+
+        <motion.div
+          className="garfada-footer"
+
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+
+          viewport={{
+            once: true,
+          }}
+        >
+
+          <div>
+
+            <span className="mini-label">
+              Stack do projeto
+            </span>
+
+
+            <div className="portfolio-tags garfada-tags">
+              {garfadaStack.map((tech) => (
+                <span key={tech}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+          </div>
+
+
+          <div className="garfada-actions">
+
+            {GARFADA_DEMO_URL && (
+              <a
+                href={GARFADA_DEMO_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="garfada-button garfada-button-primary"
+              >
+                <UtensilsCrossed size={17} />
+                Testar a demo
+              </a>
+            )}
+
+
+            <a
+              href={GARFADA_GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="garfada-button"
+            >
+              <FaGithub size={17} />
+              Ver no GitHub
+            </a>
+
+          </div>
+
+        </motion.div>
 
       </section>
 
